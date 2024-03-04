@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+    networks:
+      mysql-phpmyadmin:
+        aliases:
+          - mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - "8081:80"
+    networks:
+      mysql-phpmyadmin:
+        aliases:
+          - phpmyadmin
+
+networks:
+  mysql-phpmyadmin:
+    driver: bridge
