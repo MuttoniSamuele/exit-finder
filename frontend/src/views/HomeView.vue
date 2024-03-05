@@ -1,4 +1,3 @@
 <template>
-  <main>
-  </main>
+  Home page
 </template>
