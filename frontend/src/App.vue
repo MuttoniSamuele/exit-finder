@@ -43,7 +43,7 @@ import { RouterLink, RouterView } from 'vue-router'
       </template>
 
       <template v-else>
-        <a class="btn btn-primary">Login</a>
+        <a href="localhost:3000/google" class="btn btn-primary">Login</a>
       </template>
     </div>
   </nav>
