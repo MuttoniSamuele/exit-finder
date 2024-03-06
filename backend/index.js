@@ -1,4 +1,4 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import cors from "cors";
@@ -28,7 +28,7 @@ db.connect((err) => {
 });
 
 app.use(cors({
-  origin: 'http://localhost:5000',
+  origin: 'http://localhost:8080',
   credentials: true,
 }));
 
@@ -52,17 +52,9 @@ const isLoggedIn = (req, res, next) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("/", (_req, res) => {
-  res.json({ message: "You are not logged in" });
-})
-
 app.get("/failed", (_req, res) => {
-  res.send("Failed");
-})
-
-app.get("/success", isLoggedIn, (req, res) => {
-  res.send(`Welcome ${req.user.email}`);
-})
+  res.send("Login failed");
+});
 
 app.get("/google",
   passport.authenticate("google", {
@@ -75,15 +67,21 @@ app.get("/google/callback",
     failureRedirect: "/failed",
   }),
   function (req, res) {
-    res.redirect("/success")
+    res.redirect("http://localhost:8080");
   }
 );
 
+app.get("/user-info", isLoggedIn, (req, res) => {
+  res.json({
+    userInfo: req.user._json,
+  });
+});
+
 app.get("/logout", (req, res) => {
   req.session = null;
-  req.logout();
-  res.redirect("/");
-})
+  req.logout(() => { });
+  res.send("Successfully logged out");
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT} `);
