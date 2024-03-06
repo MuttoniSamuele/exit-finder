@@ -69,9 +69,6 @@ import { RouterLink, RouterView } from 'vue-router'
           return null;
         }
         return (await res.json()).userInfo;
-      },
-      async logout() {
-        const res = await fetch("http://localhost:3000/logout", { credentials: "include" });
       }
     },
     async mounted() {
