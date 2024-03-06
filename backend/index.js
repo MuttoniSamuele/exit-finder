@@ -11,21 +11,21 @@ const PORT = 3000;
 
 const app = express();
 
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "test"
-});
+// const db = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "",
+//   database: "test"
+// });
 
-db.connect((err) => {
-  if (err) {
-    console.log(`Error connecting to database: ${err}`)
-    process.exit(1);
-  } else {
-    console.log("Connected to database");
-  }
-});
+// db.connect((err) => {
+//   if (err) {
+//     console.log(`Error connecting to database: ${err}`)
+//     process.exit(1);
+//   } else {
+//     console.log("Connected to database");
+//   }
+// });
 
 app.use(cors({
   origin: 'http://localhost:8080',
@@ -78,9 +78,12 @@ app.get("/user-info", isLoggedIn, (req, res) => {
 });
 
 app.get("/logout", (req, res) => {
-  req.session = null;
-  req.logout(() => { });
-  res.send("Successfully logged out");
+  req.session.destroy((err) => {
+    if (!err) {
+      req.logout(() => { });
+    }
+    res.redirect("http://localhost:8080");
+  });
 });
 
 app.listen(PORT, () => {

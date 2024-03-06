@@ -21,7 +21,7 @@ import { RouterLink, RouterView } from 'vue-router'
     <div class="flex-none gap-2">
       <template v-if="userInfo !== null">
         <span class="font-bold">
-          {{ `${userInfo.given_name} ${userInfo.family_name}` }}
+          {{ `${userInfo.given_name || ""} ${userInfo.family_name || ""}` }}
         </span>
         <div class="dropdown dropdown-end">
           <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
@@ -34,7 +34,7 @@ import { RouterLink, RouterView } from 'vue-router'
           </div>
           <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-300 rounded-box w-32">
             <li>
-              <a class="text-error">
+              <a href="http://localhost:3000/logout" class="text-error">
                 Logout
               </a>
             </li>
@@ -50,7 +50,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
   <main class="flex justify-center mt-4">
     <div class="w-4/5">
-    <RouterView />
+      <RouterView />
     </div>
   </main>
 </template>
@@ -71,7 +71,7 @@ import { RouterLink, RouterView } from 'vue-router'
         return (await res.json()).userInfo;
       },
       async logout() {
-
+        const res = await fetch("http://localhost:3000/logout", { credentials: "include" });
       }
     },
     async mounted() {
