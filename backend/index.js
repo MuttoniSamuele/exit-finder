@@ -1,31 +1,16 @@
 import dotenv from "dotenv";
 dotenv.config();
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 import express from "express";
 import cors from "cors";
-import mysql from "mysql";
 import bodyParser from "body-parser";
 import session from "express-session";
 import { passport } from "./auth.js";
 
 const PORT = 3000;
-
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
-
-// const db = mysql.createConnection({
-//   host: "localhost",
-//   user: "root",
-//   password: "",
-//   database: "test"
-// });
-
-// db.connect((err) => {
-//   if (err) {
-//     console.log(`Error connecting to database: ${err}`)
-//     process.exit(1);
-//   } else {
-//     console.log("Connected to database");
-//   }
-// });
 
 app.use(cors({
   origin: 'http://localhost:8080',
@@ -84,6 +69,10 @@ app.get("/logout", (req, res) => {
     }
     res.redirect("http://localhost:8080");
   });
+});
+
+app.get("/classrooms", (_req, res) => {
+  res.sendFile(__dirname + "/classrooms.json");
 });
 
 app.listen(PORT, () => {

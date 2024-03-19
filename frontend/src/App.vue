@@ -3,19 +3,24 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <nav class="navbar bg-base-300">
+  <nav class="navbar bg-neutral">
     <div class="flex-1">
       <RouterLink class="btn btn-ghost text-xl" to="/">
         Exit Finder
       </RouterLink>
 
-      <ul class="menu menu-horizontal px-1">
-        <li>
-          <RouterLink to="/about">
-            About
-          </RouterLink>
-        </li>
-      </ul>
+      <div class="dropdown">
+        <div tabindex="0" role="button" class="btn btn-ghost m-1 font-normal">
+          Find
+        </div>
+        <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-300 rounded-box w-52">
+          <li v-for="[building, name] of buildings">
+            <RouterLink :to="{ name: 'classrooms', params: { building } }">
+              {{ name }}
+            </RouterLink>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div class="flex-none gap-2">
@@ -59,7 +64,15 @@ import { RouterLink, RouterView } from 'vue-router'
   export default {
     data() {
       return {
-        userInfo: null
+        userInfo: null,
+        buildings: [
+          ["Centrale", "Edificio centrale"],
+          ["Informatica", "Palazzina informatica"],
+          ["Elettronica", "Palazzina elettronica"],
+          ["Meccanica", "Palazzina meccanica"],
+          ["Tessile", "Palazzina tessile"],
+          ["Palestre", "Palestre"],
+        ]
       }
     },
     methods: {
