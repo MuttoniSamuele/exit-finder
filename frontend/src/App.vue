@@ -3,7 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <nav class="navbar bg-neutral">
+  <nav class="navbar bg-base-300 fixed top-0 z-10">
     <div class="flex-1">
       <RouterLink class="btn btn-ghost text-xl" to="/">
         Exit Finder
@@ -31,15 +31,12 @@ import { RouterLink, RouterView } from 'vue-router'
         <div class="dropdown dropdown-end">
           <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
             <div class="w-10 rounded-full">
-              <img
-                alt="Your profile picture"
-                :src="userInfo.picture"
-              />
+              <img alt="Your profile picture" :src="userInfo.picture" />
             </div>
           </div>
           <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-300 rounded-box w-32">
             <li>
-              <a href="http://localhost:3000/logout" class="text-error">
+              <a href="http://localhost:3000/logout" class="text-red-400">
                 Logout
               </a>
             </li>
@@ -48,44 +45,47 @@ import { RouterLink, RouterView } from 'vue-router'
       </template>
 
       <template v-else>
-        <a href="http://localhost:3000/google" class="btn btn-primary">Login</a>
+        <a href="http://localhost:3000/google" class="btn btn-accent">Login</a>
       </template>
     </div>
   </nav>
 
-  <main class="flex justify-center mt-4">
-    <div class="w-4/5">
+  <main class="flex-1 flex justify-center h-full pt-[4.5rem]">
+    <div class="w-4/5 m-8">
       <RouterView />
     </div>
   </main>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        userInfo: null,
-        buildings: [
-          ["Centrale", "Edificio centrale"],
-          ["Informatica", "Palazzina informatica"],
-          ["Elettronica", "Palazzina elettronica"],
-          ["Meccanica", "Palazzina meccanica"],
-          ["Tessile", "Palazzina tessile"],
-          ["Palestre", "Palestre"],
-        ]
-      }
-    },
-    methods: {
-      async fetchUserInfo() {
-        const res = await fetch("http://localhost:3000/user-info", { credentials: "include" });
-        if (!res.ok) {
-          return null;
-        }
-        return (await res.json()).userInfo;
-      }
-    },
-    async mounted() {
-      this.userInfo = await this.fetchUserInfo();
+export default {
+  data() {
+    return {
+      userInfo: null,
     }
+  },
+  methods: {
+    async fetchUserInfo() {
+      const res = await fetch(
+        "http://localhost:3000/user-info",
+        { credentials: "include" }
+      );
+      if (!res.ok) {
+        return null;
+      }
+      return (await res.json()).userInfo;
+    }
+  },
+  async mounted() {
+    this.userInfo = await this.fetchUserInfo();
   }
+}
+export const buildings = [
+  ["Centrale", "Edificio centrale"],
+  ["Informatica", "Palazzina informatica"],
+  ["Elettronica", "Palazzina elettronica"],
+  ["Meccanica", "Palazzina meccanica"],
+  ["Tessile", "Palazzina tessile"],
+  ["Palestre", "Palestre"],
+];
 </script>
