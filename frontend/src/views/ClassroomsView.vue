@@ -1,14 +1,23 @@
 <script setup>
-  import ClassroomCard from "../components/ClassroomCard.vue"
+import ClassroomCard from "../components/ClassroomCard.vue"
+import { buildings, floors } from "../App.vue"
 </script>
 
 <template>
-  {{ building }}
-  <ClassroomCard
-    name="T3-8"
-    longName="T3-8 Lab. Tecn. CAD Tessile"
-    gatheringPoint="6"
-  />
+  <h1 class="text-4xl text-primary font-bold">
+    {{ (buildings.filter(([b, _n]) => b === building)[0] || ["", "Why are you here?"])[1] }}
+  </h1>
+  <template v-for="[floor, floorName] of floors">
+    <section class="my-12" v-if="classrooms.length > 0 && filterClassrooms(floor).length > 0">
+      <h2 class="text-3xl font-bold mb-2">
+        {{ floorName }}
+      </h2>
+      <div class="flex flex-wrap">
+        <ClassroomCard v-for="c of filterClassrooms(floor).sort(compareClassrooms)" :name="c.Name"
+          :longName="c.Longname" :gatheringPoint="c.GatheringPoint" />
+      </div>
+    </section>
+  </template>
 </template>
 
 <script>
@@ -16,20 +25,45 @@ export default {
   data() {
     return {
       building: "",
-      classrooms: []
+      classrooms: [],
     }
   },
   methods: {
     async fetchClassrooms() {
       const res = await fetch("http://localhost:3000/classrooms");
       return res.ok ? await res.json() : [];
+    },
+    filterClassrooms(floor) {
+      return this.classrooms.filter(
+        (c) => c.Building === this.building && c.Floor === floor
+      );
+    },
+    compareClassrooms(a, b) {
+      function calcWeight(name) {
+        const digits = [];
+        for (const c of name) {
+          const n = parseInt(c);
+          if (!isNaN(n)) {
+            digits.push(n);
+          }
+        }
+        if (digits.length === 3) {
+          return digits[0] * 100 + digits[1] * 10 + digits[2];
+        }
+        if (digits.length == 2) {
+          return digits[0] * 100 + digits[1];
+        }
+        return 999;
+      }
+      return calcWeight(a.Name) - calcWeight(b.Name)
     }
   },
-  mounted() {
-    this.classrooms = this.fetchClassrooms();
+  async mounted() {
+    this.building = this.$route.params.building;
+    this.classrooms = await this.fetchClassrooms();
   },
   watch: {
-    async $route(_to, _from){
+    async $route(_to, _from) {
       this.building = this.$route.params.building;
     }
   }

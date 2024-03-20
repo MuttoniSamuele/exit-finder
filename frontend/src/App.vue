@@ -45,7 +45,9 @@ import { RouterLink, RouterView } from 'vue-router'
       </template>
 
       <template v-else>
-        <a href="http://localhost:3000/google" class="btn btn-accent">Login</a>
+        <a href="http://localhost:3000/google" class="btn btn-accent mr-1">
+          Login
+        </a>
       </template>
     </div>
   </nav>
@@ -87,5 +89,11 @@ export const buildings = [
   ["Meccanica", "Palazzina meccanica"],
   ["Tessile", "Palazzina tessile"],
   ["Palestre", "Palestre"],
+];
+export const floors = [
+  ["Ground", "Ground floor"],
+  ["1", "1st floor"],
+  ["2", "2nd floor"],
+  ["3", "3rd floor"]
 ];
 </script>
