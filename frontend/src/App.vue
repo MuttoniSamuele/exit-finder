@@ -1,5 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import { IS_RSPP, fetchUserInfo } from "./utils.js"
+import LoginButton from "./components/LoginButton.vue"
 </script>
 
 <template>
@@ -21,6 +23,10 @@ import { RouterLink, RouterView } from 'vue-router'
           </li>
         </ul>
       </div>
+
+      <RouterLink class="btn btn-ghost m-1 font-normal" to="/gathering-points">
+        Gathering points
+      </RouterLink>
     </div>
 
     <div class="flex-none gap-2">
@@ -45,9 +51,7 @@ import { RouterLink, RouterView } from 'vue-router'
       </template>
 
       <template v-else>
-        <a href="http://localhost:3000/google" class="btn btn-accent mr-1">
-          Login
-        </a>
+        <LoginButton />
       </template>
     </div>
   </nav>
@@ -66,20 +70,9 @@ export default {
       userInfo: null,
     }
   },
-  methods: {
-    async fetchUserInfo() {
-      const res = await fetch(
-        "http://localhost:3000/user-info",
-        { credentials: "include" }
-      );
-      if (!res.ok) {
-        return null;
-      }
-      return (await res.json()).userInfo;
-    }
-  },
   async mounted() {
-    this.userInfo = await this.fetchUserInfo();
+    this.userInfo = await fetchUserInfo();
+    console.log(this.userInfo)
   }
 }
 export const buildings = [
