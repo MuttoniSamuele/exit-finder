@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import { IS_RSPP, fetchUserInfo } from "./utils.js"
+import { API_HOST, fetchUserInfo } from "./utils.js"
 import LoginButton from "./components/LoginButton.vue"
 </script>
 
@@ -42,7 +42,7 @@ import LoginButton from "./components/LoginButton.vue"
           </div>
           <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-300 rounded-box w-32">
             <li>
-              <a href="http://localhost:3000/logout" class="text-red-400">
+              <a :href="`${API_HOST}/logout`" class="text-red-400">
                 Logout
               </a>
             </li>

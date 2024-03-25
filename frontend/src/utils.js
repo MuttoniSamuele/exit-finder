@@ -1,8 +1,10 @@
 export const IS_RSPP = true;
 
+export const API_HOST = "http://mutti.eu.pythonanywhere.com";
+
 export async function fetchUserInfo() {
   const res = await fetch(
-    "http://localhost:3000/user-info",
+    `${API_HOST}/user-info`,
     { credentials: "include" }
   );
   if (!res.ok) {
