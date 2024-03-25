@@ -1,6 +1,6 @@
 export const IS_RSPP = true;
 
-export const API_HOST = "http://mutti.eu.pythonanywhere.com";
+export const API_HOST = "http://localhost:8080";  // http://localhost:8080 | https://mutti.eu.pythonanywhere.com 
 
 export async function fetchUserInfo() {
   const res = await fetch(

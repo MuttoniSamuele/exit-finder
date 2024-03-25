@@ -1,4 +1,4 @@
-from flask import Flask, url_for, redirect, session
+from flask import Flask, send_from_directory, url_for, redirect, session
 from authlib.integrations.flask_client import OAuth
 from flask_cors import CORS
 import os
@@ -16,7 +16,14 @@ oauth = OAuth(app)
 
 @app.route("/")
 def index():
-    return "It works"
+    return send_from_directory("frontend/dist", "index.html")
+
+@app.route("/", defaults={"path": "index.html"})
+@app.route("/<path:path>")
+def static_files(path):
+    if path == "index.html" or path.startswith("assets"):
+        return send_from_directory("frontend/dist", path)
+    return redirect("/")
 
 @app.route("/google/")
 def google():
@@ -53,4 +60,4 @@ def logout():
     return redirect(ORIGIN)
 
 if __name__ == "__main__":
-    app.run(debug=True, port=3000)
+    app.run(debug=True, port=8080)
