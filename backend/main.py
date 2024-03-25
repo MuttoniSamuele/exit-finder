@@ -3,9 +3,9 @@ from authlib.integrations.flask_client import OAuth
 from flask_cors import CORS
 import os
 
-CLIENT_ID = os.environ.get("CLIENT_ID", None)
-CLIENT_SECRET = os.environ.get("CLIENT_SECRET", None)
-ORIGIN = os.environ.get("ORIGIN", None)
+CLIENT_ID = os.getenv("CLIENT_ID")
+CLIENT_SECRET = os.getenv("CLIENT_SECRET")
+ORIGIN = os.getenv("ORIGIN")
 
 app = Flask(__name__)
 app.secret_key = os.urandom(12)
@@ -37,7 +37,6 @@ def google():
 def google_auth():
     token = oauth.google.authorize_access_token()
     user_info = oauth.google.parse_id_token(token, False)
-    print(" Google User ", user_info)
     session["userInfo"] = user_info
     return redirect(ORIGIN)
 
