@@ -8,7 +8,7 @@ export async function fetchUserInfo() {
   if (!res.ok) {
     return null;
   }
-  const userInfo = (await res.json()).userInfo;
+  const userInfo = await res.json();
   userInfo.isPaleocapa = userInfo.email.endsWith("itispaleocapa.it");
   userInfo.type = userInfo.email.startsWith("rspp")
     ? "rspp"
@@ -22,7 +22,6 @@ export async function fetchClassrooms() {
   const res = await fetch("/static/classrooms.json");
   return res.ok ? await res.json() : [];
 }
-
 
 export function filterClassroomsByBuilding(classrooms, building) {
   return classrooms.filter(
