@@ -15,7 +15,7 @@ const router = createRouter({
       component: () => import('../views/ClassroomsView.vue')
     },
     {
-      path: '/gathering-points/:exit?',
+      path: '/gathering-points/:gatheringPoint?',
       name: 'gathering-points',
       component: () => import('../views/GatheringPointsView.vue')
     }

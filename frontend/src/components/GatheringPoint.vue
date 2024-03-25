@@ -12,7 +12,7 @@
               ? 'bg-blue-500'
               : gatheringPoint === '6'
                 ? 'bg-purple-500'
-                : 'bg-black')">
+                : 'bg-amber-600')">
     {{ gatheringPoint }}
   </div>
 </template>
