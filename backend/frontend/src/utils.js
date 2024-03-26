@@ -20,11 +20,6 @@ export async function fetchUserInfo() {
   return userInfo;
 }
 
-export async function fetchClassrooms() {
-  const res = await fetch("/static/classrooms.json");
-  return res.ok ? await res.json() : [];
-}
-
 export function filterClassroomsByBuilding(classrooms, building) {
   return classrooms.filter(
     (c) => c.Building === building

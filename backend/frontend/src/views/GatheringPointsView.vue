@@ -1,7 +1,8 @@
 <script setup>
 import GatheringPoint from "../components/GatheringPoint.vue"
 import ClassroomsList from "../components/ClassroomsList.vue"
-import { fetchUserInfo, fetchClassrooms, compareClassroomsFactory, filterClassroomsByGatheringPoint } from "../utils.js"
+import { fetchUserInfo, compareClassroomsFactory, filterClassroomsByGatheringPoint } from "../utils.js"
+import { CLASSROOMS } from "../classrooms.js"
 import LoginButton from "../components/LoginButton.vue"
 </script>
 
@@ -21,10 +22,13 @@ import LoginButton from "../components/LoginButton.vue"
 
   <template v-else>
     <div class="flex">
-      <RouterLink class="mx-2" v-for="gp of ['A', '1', '2', '3', '4', '5', '6']"
-        :to="gp === 'A' ? '/gathering-points' : { name: 'gathering-points', params: { gatheringPoint: gp } }">
-        <GatheringPoint :gatheringPoint="gp" />
-      </RouterLink>
+      <div :class="'mx-2 ' + (gatheringPoint === gp || (gp === 'A' && gatheringPoint === '') ? 'opacity-50' : '')"
+        v-for="gp of ['A', '1', '2', '3', '4', '5', '6']">
+        <RouterLink
+          :to="gp === 'A' ? '/gathering-points' : { name: 'gathering-points', params: { gatheringPoint: gp } }">
+          <GatheringPoint :gatheringPoint="gp" />
+        </RouterLink>
+      </div>
     </div>
 
     <div class="my-8">
@@ -46,7 +50,7 @@ export default {
   async mounted() {
     this.gatheringPoint = this.$route.params.gatheringPoint;
     this.userInfo = await fetchUserInfo();
-    this.classrooms = await fetchClassrooms();
+    this.classrooms = CLASSROOMS;
   },
   watch: {
     async $route(_to, _from) {

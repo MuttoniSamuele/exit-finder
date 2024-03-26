@@ -1,7 +1,8 @@
 <script setup>
 import ClassroomsList from "../components/ClassroomsList.vue"
 import { buildings, floors } from "../App.vue"
-import { fetchUserInfo, fetchClassrooms, compareClassroomsFactory, filterClassroomsByFloor, filterClassroomsByBuilding } from "../utils.js"
+import { fetchUserInfo, compareClassroomsFactory, filterClassroomsByFloor, filterClassroomsByBuilding } from "../utils.js"
+import { CLASSROOMS } from "../classrooms.js"
 import LoginButton from "../components/LoginButton.vue"
 </script>
 
@@ -44,7 +45,7 @@ export default {
   async mounted() {
     this.building = this.$route.params.building;
     this.userInfo = await fetchUserInfo();
-    this.classrooms = await fetchClassrooms();
+    this.classrooms = CLASSROOMS;
   },
   watch: {
     async $route(_to, _from) {
