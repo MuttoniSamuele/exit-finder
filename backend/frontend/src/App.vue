@@ -8,11 +8,36 @@ import MapModal from "./components/MapModal.vue"
 <template>
   <nav class="navbar bg-base-300 fixed top-0 z-10">
     <div class="flex-1">
+      <div class="dropdown">
+        <div tabindex="0" role="button" class="btn btn-ghost sm:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+          </svg>
+        </div>
+        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-300 rounded-box w-64">
+          <li>
+            <span>Find</span>
+            <ul class="p-2">
+              <li v-for="[building, name] of buildings">
+                <RouterLink :to="{ name: 'classrooms', params: { building } }">
+                  {{ name }}
+                </RouterLink>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <RouterLink to="/gathering-points">
+              Gathering points
+            </RouterLink>
+          </li>
+        </ul>
+      </div>
+
       <RouterLink class="btn btn-ghost text-xl" to="/">
         Exit Finder
       </RouterLink>
 
-      <div class="dropdown">
+      <div class="dropdown hidden sm:block">
         <div tabindex="0" role="button" class="btn btn-ghost m-1 font-normal">
           Find
         </div>
@@ -25,14 +50,16 @@ import MapModal from "./components/MapModal.vue"
         </ul>
       </div>
 
-      <RouterLink class="btn btn-ghost m-1 font-normal" to="/gathering-points">
-        Gathering points
-      </RouterLink>
+      <div class="hidden sm:inline">
+        <RouterLink class="btn btn-ghost m-1 font-normal" to="/gathering-points">
+          Gathering points
+        </RouterLink>
+      </div>
     </div>
 
     <div class="flex-none gap-2">
       <template v-if="userInfo !== null">
-        <span class="font-bold">
+        <span class="hidden sm:block font-bold">
           {{ `${userInfo.given_name || ""} ${userInfo.family_name || ""}` }}
         </span>
         <div class="dropdown dropdown-end">

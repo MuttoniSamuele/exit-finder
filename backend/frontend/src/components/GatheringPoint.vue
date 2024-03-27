@@ -1,5 +1,5 @@
 <template>
-  <div :class="'flex justify-center items-center w-7 h-7 rounded-full text-neutral-content '
+  <div :class="'flex justify-center font-bold items-center w-7 h-7 rounded-full text-neutral-content '
     + (gatheringPoint === '1'
       ? 'bg-red-500'
       : gatheringPoint === '2'

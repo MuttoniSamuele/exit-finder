@@ -14,6 +14,15 @@ import LoginButton from "../components/LoginButton.vue"
     <LoginButton />
   </template>
 
+  <template v-else-if="!userInfo.isPaleocapa">
+    <h1 class="text-4xl font-bold mb-8">
+      You are not allowed to view this page
+    </h1>
+    <a href="/" class="btn btn-accent mr-1">
+      Back to home
+    </a>
+  </template>
+
   <template v-else>
     <h1 class="text-4xl text-primary font-bold">
       {{ (buildings.filter(([b, _n]) => b === building)[0] || ["", "Why are you here?"])[1] }}
@@ -32,8 +41,6 @@ import LoginButton from "../components/LoginButton.vue"
 </template>
 
 <script>
-// TODO: Login for paleocapa only
-// TODO: Ask for login when in /classrooms/whatever
 export default {
   data() {
     return {

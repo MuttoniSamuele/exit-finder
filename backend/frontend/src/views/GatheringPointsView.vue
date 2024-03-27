@@ -14,10 +14,13 @@ import LoginButton from "../components/LoginButton.vue"
     <LoginButton />
   </template>
 
-  <template v-else-if="false">
+  <template v-else-if="!userInfo.isPaleocapa || userInfo.type !== 'rspp'">
     <h1 class="text-4xl font-bold mb-8">
       You are not allowed to view this page
     </h1>
+    <a href="/" class="btn btn-accent mr-1">
+      Back to home
+    </a>
   </template>
 
   <template v-else>
