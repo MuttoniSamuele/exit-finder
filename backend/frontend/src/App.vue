@@ -2,6 +2,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 import { API_HOST, fetchUserInfo } from "./utils.js"
 import LoginButton from "./components/LoginButton.vue"
+import MapModal from "./components/MapModal.vue"
 </script>
 
 <template>
@@ -61,6 +62,8 @@ import LoginButton from "./components/LoginButton.vue"
       <RouterView />
     </div>
   </main>
+
+  <MapModal />
 </template>
 
 <script>

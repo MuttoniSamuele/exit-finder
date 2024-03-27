@@ -664,92 +664,12 @@ export const CLASSROOMS = [
     "GatheringPoint": "4"
   },
   {
-    "ROOM_ID": 89,
-    "Name": "E0-1",
-    "Longname": "pseudo aula per p. Elettr.",
-    "Floor": "Underground",
-    "Building": "Elettronica",
-    "GatheringPoint": "6"
-  },
-  {
-    "ROOM_ID": 90,
-    "Name": "E0-2",
-    "Longname": "pseudo aula per p. Elettr.",
-    "Floor": "Underground",
-    "Building": "Elettronica",
-    "GatheringPoint": "6"
-  },
-  {
-    "ROOM_ID": 91,
-    "Name": "I0-1",
-    "Longname": "pseudo aula per p. Inform.",
-    "Floor": "Underground",
-    "Building": "Informatica",
-    "GatheringPoint": "6"
-  },
-  {
-    "ROOM_ID": 92,
-    "Name": "M0-1",
-    "Longname": "pseudo aula per p.Mecc.",
-    "Floor": "Underground",
-    "Building": "Meccanica",
-    "GatheringPoint": "6"
-  },
-  {
-    "ROOM_ID": 93,
-    "Name": "M0-2",
-    "Longname": "pseudo aula per p. Mecc.",
-    "Floor": "Underground",
-    "Building": "Meccanica",
-    "GatheringPoint": "6"
-  },
-  {
-    "ROOM_ID": 94,
-    "Name": "M0-3",
-    "Longname": "pseudo aula per p. Mecc.",
-    "Floor": "Underground",
-    "Building": "Meccanica",
-    "GatheringPoint": "6"
-  },
-  {
-    "ROOM_ID": 95,
-    "Name": "T0-1",
-    "Longname": "pseudo aula per p. Tess.",
-    "Floor": "Underground",
-    "Building": "Tessile",
-    "GatheringPoint": "6"
-  },
-  {
     "ROOM_ID": 96,
     "Name": "1-5",
     "Longname": "Aula 1-5",
     "Floor": "Ground",
     "Building": "Centrale",
     "GatheringPoint": "1"
-  },
-  {
-    "ROOM_ID": 97,
-    "Name": "E0-3",
-    "Longname": "pseudo aula per p. Elettr.",
-    "Floor": "Underground",
-    "Building": "Elettronica",
-    "GatheringPoint": "6"
-  },
-  {
-    "ROOM_ID": 98,
-    "Name": "I0-2",
-    "Longname": "pseudo aula per p. Inform.",
-    "Floor": "Underground",
-    "Building": "Informatica",
-    "GatheringPoint": "6"
-  },
-  {
-    "ROOM_ID": 99,
-    "Name": "I0-3",
-    "Longname": "pseudo aula per p. Inform.",
-    "Floor": "Underground",
-    "Building": "Informatica",
-    "GatheringPoint": "6"
   },
   {
     "ROOM_ID": 100,
@@ -854,22 +774,6 @@ export const CLASSROOMS = [
     "Floor": "Ground",
     "Building": "Centrale",
     "GatheringPoint": "1"
-  },
-  {
-    "ROOM_ID": 113,
-    "Name": "I0-4",
-    "Longname": "pseudo aula per p. Inform.",
-    "Floor": "Underground",
-    "Building": "Informatica",
-    "GatheringPoint": "6"
-  },
-  {
-    "ROOM_ID": 114,
-    "Name": "I0-5",
-    "Longname": "pseudo aula per p. Inform.",
-    "Floor": "Underground",
-    "Building": "Informatica",
-    "GatheringPoint": "6"
   },
   {
     "ROOM_ID": 115,
