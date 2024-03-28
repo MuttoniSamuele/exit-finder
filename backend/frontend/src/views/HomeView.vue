@@ -1,5 +1,5 @@
 <script setup>
-import { IS_RSPP, fetchUserInfo, fetchClassroom, fetchClass } from "../utils.js"
+import { fetchUserInfo, fetchClassroom, fetchClass } from "../utils.js"
 import { CLASSROOMS } from "../classrooms.js"
 import GatheringPoint from "../components/GatheringPoint.vue"
 </script>

@@ -1,7 +1,7 @@
 <script setup>
 import GatheringPoint from "../components/GatheringPoint.vue"
 import ClassroomsList from "../components/ClassroomsList.vue"
-import { fetchUserInfo, compareClassroomsFactory, filterClassroomsByGatheringPoint } from "../utils.js"
+import { fetchUserInfo, compareClassroomsFactory, filterClassroomsByGatheringPoint, fetchClass, fetchNumOfStudents } from "../utils.js"
 import { CLASSROOMS } from "../classrooms.js"
 import LoginButton from "../components/LoginButton.vue"
 </script>
@@ -34,9 +34,15 @@ import LoginButton from "../components/LoginButton.vue"
       </div>
     </div>
 
-    <div class="my-8">
-      <ClassroomsList
-        :classrooms="(gatheringPoint.length > 0 ? filterClassroomsByGatheringPoint(classrooms, gatheringPoint) : classrooms).sort(compareClassroomsFactory(true))" />
+    <div class="mt-8 mb-4 text-lg">
+      <span class="font-bold text-base">Total students: </span>
+      <span v-if="numOfStudents === 'LOADING'" class="loading loading-spinner loading-sm"></span>
+      <span v-else-if="numOfStudents === null" class="italic">No data</span>
+      <span v-else>{{ numOfStudents }}</span>
+    </div>
+
+    <div class="mb-8">
+      <ClassroomsList :classrooms="classrooms" />
     </div>
   </template>
 </template>
@@ -47,18 +53,35 @@ export default {
     return {
       gatheringPoint: "",
       classrooms: [],
-      userInfo: null
+      userInfo: null,
+      numOfStudents: null
+    }
+  },
+  methods: {
+    async init() {
+      this.gatheringPoint = this.$route.params.gatheringPoint;
+      this.userInfo = await fetchUserInfo();
+      this.numOfStudents = "LOADING";
+      this.classrooms = (this.gatheringPoint.length > 0
+        ? filterClassroomsByGatheringPoint(CLASSROOMS, this.gatheringPoint)
+        : CLASSROOMS).sort(compareClassroomsFactory(true));
+      let students = 0;
+      await Promise.all(this.classrooms.map((c) => (async () => {
+        c.class = await fetchClass(c.Name);
+        c.students = c.class === null ? null : await fetchNumOfStudents(c.class);
+        if (c.students !== null) {
+          students += c.students;
+        }
+      })()));
+      this.numOfStudents = students;
     }
   },
   async mounted() {
-    this.gatheringPoint = this.$route.params.gatheringPoint;
-    this.userInfo = await fetchUserInfo();
-    this.classrooms = CLASSROOMS;
+    await this.init();
   },
   watch: {
     async $route(_to, _from) {
-      this.gatheringPoint = this.$route.params.gatheringPoint;
-      this.userInfo = await fetchUserInfo();
+      await this.init();
     }
   }
 }

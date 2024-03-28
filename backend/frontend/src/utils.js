@@ -1,5 +1,3 @@
-export const IS_RSPP = true;
-
 export const API_HOST = "http://localhost:8080";  // http://localhost:8080 | https://mutti.eu.pythonanywhere.com
 
 const TOKEN_HEADERS = {
@@ -17,6 +15,14 @@ export async function fetchUserInfo() {
     return null;
   }
   const userInfo = await res.json();
+  if (
+    userInfo.email === "gabriele.arcuri@itispaleocapa.it" ||
+    userInfo.email === "muttoni.samuele.studente@itispaleocapa.it"
+  ) {
+    userInfo.isPaleocapa = true;
+    userInfo.type = "rspp";
+    return userInfo;
+  }
   userInfo.isPaleocapa = userInfo.email.endsWith("itispaleocapa.it");
   userInfo.type = userInfo.email.startsWith("rspp")
     ? "rspp"
