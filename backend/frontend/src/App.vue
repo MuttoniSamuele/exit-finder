@@ -102,7 +102,6 @@ export default {
   },
   async mounted() {
     this.userInfo = await fetchUserInfo();
-    console.log(this.userInfo)
   }
 }
 export const buildings = [

@@ -10,7 +10,7 @@ import { openModal } from "../components/MapModal.vue"
         <GatheringPoint :gatheringPoint="gatheringPoint" />
         {{ name }}
       </h2>
-      <p class="italic">
+      <p class="italic text-left">
         {{ longName }}
       </p>
     </div>
