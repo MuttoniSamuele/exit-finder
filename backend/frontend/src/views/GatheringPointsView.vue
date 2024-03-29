@@ -36,7 +36,7 @@ import LoginButton from "../components/LoginButton.vue"
 
     <div class="mt-8 mb-4 text-lg">
       <span class="font-bold text-base">Total students: </span>
-      <span v-if="numOfStudents === 'LOADING'" class="loading loading-spinner loading-sm"></span>
+      <span v-if="numOfStudents === 'LOADING'" class="loading loading-spinner loading-sm ml-1"></span>
       <span v-else-if="numOfStudents === null" class="italic">No data</span>
       <span v-else>{{ numOfStudents }}</span>
     </div>
@@ -73,7 +73,7 @@ export default {
           students += c.students;
         }
       })()));
-      this.numOfStudents = students;
+      this.numOfStudents = students > 0 ? students : null;
     }
   },
   async mounted() {
