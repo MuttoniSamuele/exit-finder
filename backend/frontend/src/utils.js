@@ -76,7 +76,7 @@ export function compareClassroomsFactory(sortGatheringPoints = false) {
 }
 
 function getWeekDayClassHour() {
-  return [1, 1];
+  // return [1, 1];
   const now = new Date();
   return [now.getDay(), now.getHours() - 7];
 }
