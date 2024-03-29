@@ -34,7 +34,8 @@ import LoginButton from "../components/LoginButton.vue"
           {{ floorName }}
         </h2>
         <ClassroomsList
-          :classrooms="filterClassroomsByFloor(filterClassroomsByBuilding(classrooms, building), floor).sort(compareClassroomsFactory())" />
+          :classrooms="filterClassroomsByFloor(filterClassroomsByBuilding(classrooms, building), floor).sort(compareClassroomsFactory())"
+          :showData="false" />
       </section>
     </template>
   </template>

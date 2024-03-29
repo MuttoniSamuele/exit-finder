@@ -42,7 +42,7 @@ import LoginButton from "../components/LoginButton.vue"
     </div>
 
     <div class="mb-8">
-      <ClassroomsList :classrooms="classrooms" />
+      <ClassroomsList :classrooms="classrooms" :showData="true" />
     </div>
   </template>
 </template>
@@ -61,6 +61,9 @@ export default {
     async init() {
       this.gatheringPoint = this.$route.params.gatheringPoint;
       this.userInfo = await fetchUserInfo();
+      if (this.userInfo === null || !this.userInfo.isPaleocapa || this.userInfo.type !== 'rspp') {
+        return;
+      }
       this.numOfStudents = "LOADING";
       this.classrooms = (this.gatheringPoint.length > 0
         ? filterClassroomsByGatheringPoint(CLASSROOMS, this.gatheringPoint)

@@ -2,6 +2,7 @@
 import { fetchUserInfo, fetchClassroom, fetchClass } from "../utils.js"
 import { CLASSROOMS } from "../classrooms.js"
 import GatheringPoint from "../components/GatheringPoint.vue"
+import { openModal } from "../components/MapModal.vue"
 </script>
 
 <template>
