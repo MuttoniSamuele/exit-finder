@@ -5,9 +5,10 @@ export default {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
-    screens: {
-      "xs": "580px"
+    extend: {
+      screens: {
+        "xs": "580px"
+      }
     }
   },
   plugins: [require("daisyui")],

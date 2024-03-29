@@ -5,7 +5,7 @@ import GatheringPoint from "../components/GatheringPoint.vue"
 </script>
 
 <template>
-  <div class="flex flex-col lg:flex-row lg:h-full">
+  <div :class="'flex flex-col lg:flex-row h-full ' + (userInfo === null ? 'justify-center' : '')">
     <div class="hero">
       <div class="hero-content text-center">
         <div>
@@ -26,7 +26,7 @@ import GatheringPoint from "../components/GatheringPoint.vue"
     <div v-if="userInfo !== null" class="divider lg:hidden"></div>
 
     <div v-if="userInfo !== null"
-      class="mt-12 mb-16 lg:my-0 lg:w-2/3 flex flex-row lg:flex-col justify-center items-center">
+      class="mt-12 pb-16 lg:pb-0 lg:my-0 lg:w-2/3 flex flex-row lg:flex-col justify-center items-center">
       <div class="card w-72 h-auto bg-base-300 shadow-xl" @click="() => openModal(name, gatheringPoint)">
         <div class="card-body">
           <h2 class="card-title flex justify-between">
