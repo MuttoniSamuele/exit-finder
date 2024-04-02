@@ -28,7 +28,7 @@ import { openModal } from "../components/MapModal.vue"
 
     <div v-if="userInfo !== null"
       class="mt-12 pb-16 lg:pb-0 lg:my-0 lg:w-2/3 flex flex-row lg:flex-col justify-center items-center">
-      <div class="card w-72 h-auto bg-base-300 shadow-xl" @click="() => openModal(name, gatheringPoint)">
+      <div class="card w-72 h-auto bg-base-300 shadow-xl">
         <div class="card-body">
           <h2 class="card-title flex justify-between">
             {{ `${userInfo.given_name || ""} ${userInfo.family_name || ""}` }}
